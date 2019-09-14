@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<script src="/static/js/vue.js"></script>-->
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+
+    <title>vue</title>
+</head>
+<body>
+<div id="masonry" >
+    <div v-for="item in imgs"><img v-bind:src="item.img_"></div>
+</div>
+</body>
+</html>
+<script>
+    var masonry = new Vue({
+        el: '#masonry',
+        data: {
+            imgs:[
+                {img_:"/static/img/1.jpg"},
+                {img_:"/static/img/2.jpg"},
+                {img_:"/static/img/3.jpg"},
+                {img_:"/static/img/4.jpg"},
+                {img_:"/static/img/5.jpg"},
+                {img_:"/static/img/6.jpg"},
+                {img_:"/static/img/7.jpg"},
+                {img_:"/static/img/8.jpg"},
+                {img_:"/static/img/9.jpg"},
+                {img_:"/static/img/10.jpg"},
+                {img_:"/static/img/11.jpg"},
+                {img_:"/static/img/12.jpg"},
+                {img_:"/static/img/13.jpg"},
+                {img_:"/static/img/14.jpg"},
+                {img_:"/static/img/15.jpg"},
+                {img_:"/static/img/16.jpg"},
+                {img_:"/static/img/17.jpg"},
+                {img_:"/static/img/18.jpg"}
+            ]
+        },
+        methods:{
+
+        }
+    });
+</script>
