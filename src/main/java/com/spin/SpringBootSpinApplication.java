@@ -13,6 +13,8 @@ public class SpringBootSpinApplication extends SpringBootServletInitializer {
     }
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        System.out.println("test");
         return builder.sources(SpringBootSpinApplication.class);
     }
+
 }

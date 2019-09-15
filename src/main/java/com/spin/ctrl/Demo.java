@@ -33,7 +33,7 @@ public class Demo {
     @RequestMapping(value = "/vue")
     public String vue(){
         System.out.println(1);
-        return "vue"; 
+        return "vue";
     }
 
     @GetMapping(value = "/file")
