@@ -15,12 +15,16 @@
         .top{
             background-color: #337ab7;
             height: 100px;
+            padding-top: 20px;
+            padding-left: 10%;
+            padding-right: 10%;
+            /*margin: 0 auto;*/
+            /*设置完padding之后，盒子整体会偏高，可以设置该属性禁止偏高*/
+            box-sizing: border-box;
+
         }
         .title{
             float: left;
-            margin-left: 10%;
-            margin-top: 20px;
-
         }
 
         .title_left{
@@ -40,10 +44,8 @@
             margin-left: 10px;
         }
 
-        .shoucang{
+        .link{
             float: right;
-            margin-right: 10%;
-            margin-top: 20px;
         }
         .shouye{
             font-family: serif;
@@ -104,12 +106,57 @@
             width: 60%;
             height: 100%;
         }
+        .video_title{
+            width: 100%;
+            background-color: #000000;
+            text-align: center;
+            color: white;
+        }
+        .video_{
+            width: 100%;
+        }
+        .produce_doy{
+            background-color: #FFD7B7;
+            width: 100%;
+            text-align: center;
+        }
+        table{
+            width: 100%;
+        }
+        tr{
+            text-align: center;
+            height: 50px;
+        }
+        .addtel{
+            text-align: center;
+        }
+        .r_top{
+            height: 172px;
+        }
+        .r_foot_top{
+            width: 100%;
+            background-color: #9d9d9d;
+        }
+        .r_top_left{
+            float: left;
+            width: 60%;
+            background-color: #0f0f0f;
+            color: #eeeeee;
+        }
+        .r_top_right{
+            float: right;
+            width: 35%;
+            background-color: #0f0f0f;
+            color: #eeeeee;
+        }
         .footer{
             background-color: #337ab7;
             height: 150px;
             position:fixed;
             width: 100%;
             bottom: 0px;
+            padding-top: 10px;
+            box-sizing: border-box;
 
         }
         .slogan{
@@ -124,21 +171,34 @@
             -webkit-text-stroke: 1px #dddddd;
             font-size:50px;
             color:transparent;
-            margin-left: 10px;
         }
         .hang2{
             font-family: serif;
             -webkit-text-stroke: 1px #dddddd;
             font-size:25px;
             color:transparent;
-            margin-left: 10px;
         }
         .hang3{
             font-family: serif;
             -webkit-text-stroke: 1px #dddddd;
             font-size:25px;
             color:transparent;
-            margin-left: 10px;
+        }
+
+        .marker {
+
+            width: 50px;
+
+            height: 50px;
+
+            border: 1px solid #088;
+
+            border-radius: 100px;
+
+            background-color: #FFFFFF;
+
+            opacity: 0.5;
+
         }
     </style>
     <title>王永纺织厂</title>
@@ -149,7 +209,7 @@
         <div class="title_left">王永纺织厂</div>
         <div class="title_right">质量保证，50公里内送货上门<br>厂价直销利润低廉</div>
     </div>
-    <div class="shoucang">
+    <div class="link">
         <div class="shouye">加入收藏，设为首页</div>
         <div class="tel">咨询电话：13383029580</div>
     </div>
@@ -165,8 +225,55 @@
 <div class="center">
     <div class="center_top"></div>
     <div class="center_artical">
-        <div class="center_artical_left"></div>
-        <div class="center_artical_right"></div>
+        <div class="center_artical_left">
+            <div class="video_title">
+                视频中心
+            </div>
+            <div class="video_">
+                <video ></video>
+            </div>
+            <div class="produce_doy">
+                产品动态
+
+            </div>
+            <div>
+                <table >
+                    <tr>
+                        <td>产品规格</td>
+                        <td>产品型号</td>
+                    </tr>
+                    <tr>
+                        <td>产品规格</td>
+                        <td>产品型号</td>
+                    </tr>
+                    <tr>
+                        <td>产品规格</td>
+                        <td>产品型号</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="addtel">地址：河北省保定市高阳县城留栗庄村</div>
+            <div class="addtel">电话：13383029580</div>
+        </div>
+        <div class="center_artical_right">
+            <div class="r_top">
+                <div class="r_top_left">
+                    <div class="about">关于我们</div>
+
+                </div>
+                <div class="r_top_right">
+                    <div class="news">新闻动态</div>
+                </div>
+            </div>
+            <div class="r_foot">
+                <div class="r_foot_top">
+                    产品展示
+                </div>
+                <div style="float: left;width: 33%;height: 50px;background-color: #9d9d9d"></div>
+                <div style="float: left;width: 33%;height: 50px; background-color: #337ab7"></div>
+                <div style="float: left;width: 33%;height: 50px; background-color: #255625"></div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="footer">
