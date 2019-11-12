@@ -1,365 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
-    <link rel="apple-touch-icon-precomposed" href="/static/icon/icon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="/static/icon/icon.ico" type="image/x-icon">
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/css/bootstrap.min.css.map" rel="stylesheet">
-    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="/static/css/bootstrap-theme.min.css.map" rel="stylesheet">
-    <link href="/static/css/pace-theme-minimal.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/bootstrap-fileinput/4.5.1/css/fileinput.min.css" rel="stylesheet">
-    <script src="/static/js/jquery.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/masonry.pkgd.min.js"></script>
-    <script src="/static/js/vue.js"></script>
-    <script src="/static/js/imagesloaded.pkgd.js"></script>
-    <script src="/static/js/pace.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.5.1/js/fileinput.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.5.1/js/locales/zh.js"></script>
-    <style>
-        .item_img{
-            max-width: 80%;
+    <meta charset="UTF-8">
+    <title>home</title>
+    <style type="text/css">
+        div{
+            border: 0px;
+            margin: 0px;
+            padding: 0px;
         }
-        .item_div{
+        p{
+            margin: 0px;
+            padding: 0px;
+        }
+        .top{
+            margin: 0px auto;
+            padding: 0px;
+            width: 1024px;
+            height: 237px;
+        }
+        .top .imgdiv{
+            width: 210px;
+            height: 237px;
+            padding: 41px 68px;
+            box-sizing: border-box;
             float: left;
-            max-width: 25%;
-            background-color: #d3d9df;
         }
-        .footer {
-            border-top: 1px solid #e5e5e5;
-            color: #777;
-            padding: 4px 0;
-            background-color: #f5f5f5;
-            position: absolute;
-            bottom: 0;
+        .top .imgdiv2{
+            float: left;
+            padding-top: 41px;
+        }
+        .divgray{
+            background-color: #b1b1b1;
+            height: 50px;
+            width: 1024px;
+            margin: 0 auto;
+        }
+        .font_me{
+            font-style: normal;
+            font-size: 33px;
+            font-weight: 500;
+            text-align: center;
+        }
+        .main{
+            margin: 0 auto;
+            /*background-color: red;*/
+            width: 1024px;
+            padding: 2px 37px;
+            box-sizing: border-box;
+        }
+        .main_content{
             width: 100%;
+            box-sizing: border-box;
+            background-color: #F3F3F3;
+            height: 100%;
         }
-        .show-grid [class ^="col-"] {
-            padding-top: 10px;
-            padding-bottom: 10px;
-            background-color: #eeeeee;
-            border: 1px solid #dddddd;
-            background-color: rgba(86,61,124,.15);
-            border: 1px solid rgba(86,61,124,.2);
+        .h_1{
+            font-weight: 800;
+            font-size: 22px;
         }
-        .container-fluid {
-            padding: 20px;
+        .describe{
+            white-space: pre-wrap;
+            font-weight: 800;
+            font-size: 12px;
         }
-        .box {
-            margin-bottom: 1%;
-            /*float: left;*/
-            width: 15%;
-            background: #fafafa;
+        .one tr{
+            height: 30px;
+            width: 900px;
+            text-align: center;
         }
-        .box:hover{
-            border:2px #D0D0D0 solid;
+        .one td{
+            text-align: center;
         }
-        .box img {
-            max-width: 100%;
-            /*margin: 5%;*/
+        .two tr{
+            
+        }
+        .two td{
+            
+        }
+        .three{
+            background-color: #CFE6EC;
+        }
+        .three td{
+            text-align: center;
+            border: 1px solid white;
+        }
+        .cr{
+            background-color: #CFE6EC;
         }
     </style>
-
-    <script>
-        pageNo = 0;
-        function getImgList(){
-            var result = "";
-            var pageNo_ = pageNo
-            $.ajax({
-                url : 'http://localhost:8080/imgs',
-                type : "get",
-                data : {"pageNo":pageNo_},
-                async : false,
-                success : function(data) {
-                    result = data;
-                    pageNo = pageNo_ + 1
-                }
-            });
-            return result;
-        }
-
-        function imgReload() {
-            var $container = $('#masonry');
-            $container.imagesLoaded(function() {
-                $container.masonry({
-                    itemSelector: '.box',
-                    gutter: 20,
-                    isAnimated: true,
-                });
-            });
-        }
-        function addProduct(){
-            $("#myModal").modal({
-                remote: "file"
-            });
-        }
-        function initFileInput(ctrlName) {
-            var control = $('#' + ctrlName);
-            control.fileinput({
-                language: 'zh', //设置语言
-                uploadUrl: "", //上传的地址
-                allowedFileExtensions: ['jpg', 'gif', 'png','doc','docx','pdf','ppt','pptx','txt'],//接收的文件后缀
-                maxFilesNum : 5,//上传最大的文件数量
-                //uploadExtraData:{"id": 1, "fileName":'123.mp3'},
-                uploadAsync: true, //默认异步上传
-                showUpload: true, //是否显示上传按钮
-                showRemove : true, //显示移除按钮
-                showPreview : true, //是否显示预览
-                showCaption: false,//是否显示标题
-                browseClass: "btn btn-primary", //按钮样式
-                //dropZoneEnabled: true,//是否显示拖拽区域
-                //minImageWidth: 50, //图片的最小宽度
-                //minImageHeight: 50,//图片的最小高度
-                //maxImageWidth: 1000,//图片的最大宽度
-                //maxImageHeight: 1000,//图片的最大高度
-                maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
-                //minFileCount: 0,
-                //maxFileCount: 10, //表示允许同时上传的最大文件个数
-                enctype: 'multipart/form-data',
-                validateInitialCount:true,
-                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-                msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
-
-            }).on('filepreupload', function(event, data, previewId, index) {     //上传中
-                var form = data.form, files = data.files, extra = data.extra,
-                    response = data.response, reader = data.reader;
-                console.log('文件正在上传');
-            }).on("fileuploaded", function (event, data, previewId, index) {    //一个文件上传成功
-                console.log('文件上传成功！'+data.id);
-                whidow.location.href = "home"
-
-            }).on('fileerror', function(event, data, msg) {  //一个文件上传失败
-                console.log('文件上传失败！'+data.id);
-            })
-        }
-        $(function() {
-            /*$("#myModal").on("hidden", function() {
-                console.log("hidden");
-                $(this).removeData("modal");
-            });*/
-            var masonry = new Vue({
-                el: '#masonry',
-                data:
-                    getImgList(pageNo)
-                ,
-                methods:{
-
-                }
-            });
-            imgReload();
-            initFileInput("input-id");
-
-            $(window).scroll(function() {
-                if ($(document).scrollTop() >= $(document).height() - $(window).height()) {//滚动到底部判断
-                    var result = getImgList(pageNo);
-                    var $container = $('#masonry');
-                    for(var i =0;i<result.products.length;i++){
-                        masonry.products.splice(masonry.products.length,1, result.products[i])
-                        $container.imagesLoaded(function() {
-                            $container.masonry({
-                                itemSelector: '.box',
-                                gutter: 20,
-                                isAnimated: true,
-                            });
-                            //http://blog.sina.com.cn/s/blog_983771b80102w2yb.html
-                            $container.masonry( "reloadItems")
-                        });
-                    }
-                }
-            })
-        });
-
-    </script>
-    <script>
-
-    </script>
-    <title>spin</title>
 </head>
 <body>
-
-<!--<div class="progress" style="max-height: 1px;margin-bottom: 1px;">
-    <div class="progress-bar" style="width:70%;"></div>
-</div>-->
-<!--<div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        Dropdown
-        <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-        <li role="separator" class="divider"></li>
-        <li><a href="#">Separated link</a></li>
-    </ul>
-</div>-->
-
-<div class="collapse navbar-collapse navbar-fixed-top" style="max-height: 10%;margin-top: 0px;padding: 0px;background-color: #f8f8f8">
-    <div class="container-fluid" style="padding: 0px">
-        <div class="navbar-header">
-            <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>-->
-            <a class="navbar-brand" href="#">
-                宝蓝
-                <!--<img alt="宝蓝" src="/static/icon/icon.ico"/>-->
-            </a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="home">首页</a></li>
-                <li><a href="#">新闻</a></li>
-                <li><a href="#">财经</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" href="#">材质 <b class="caret"></b> </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">纯棉</a></li>
-                        <li><a href="#">棉麻</a></li>
-                        <li><a href="#">涤纶</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">皮革</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" id="calor" data-toggle="dropdown" href="#">颜色 <b class="caret"></b> </a>
-                    <ul class="dropdown-menu" aria-labelledby="calor">
-                        <li><a href="#">红</a></li>
-                        <li><a href="#">黄</a></li>
-                        <li><a href="#">蓝</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">绿</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" id="design" data-toggle="dropdown" href="#">款式 <b class="caret"></b> </a>
-                    <ul class="dropdown-menu" aria-labelledby="design">
-                        <li><a href="#">方</a></li>
-                        <li><a href="#">园</a></li>
-                        <li><a href="#">三角</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">菱形</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">论坛</a></li>
-            </ul>
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">搜索</button>
-            </form>
-            <button type="button" class="btn btn-default navbar-btn" style="float: right" data-toggle="modal" data-target="#myModal" >新增产品</button>
-        </div>
+<div class="top">
+    <div class="imgdiv">
+        <img src="/image/3_01_05.jpg"/>
+    </div>
+    <div class="imgdiv2">
+        <img src="/image/3_01_06.jpg"/>
     </div>
 </div>
-<div><img src="/static/icon/backtop.jpg" style="width: 100%;height: 500px"></div>
-<div style="background: #eaeaea;">
-<div class="container" style="width: 90%;">
-    <div id="masonry" class="container-fluid" style="margin-top: 44px;">
-        <div class="box" v-for="product in products" >
-            <img v-bind:src="product.path" v-bind:title="product.name"/>
-            <div class="well well-sm" style="text-align:center">{{product.name}}</div>
-            <button type="button" class="btn btn-default btn-xs" style="margin: 0px 1px 1px 1px;">
-                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-            </button>
-            <button type="button" class="btn btn-default btn-xs" style="margin: 0px 1px 1px 1px;float: right;">
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <a v-bind:href="product.tianmaoUrl" target="_blank">上天猫看看</a>
-            </button>
-        </div><!---->
-    </div>
+<div class="divgray">
+    <p class="font_me">LEAC丙烯酸聚合物水泥防水涂料</p>
 </div>
-<!--<div aria-label="Page navigation">
-    <ul class="pagination">
-        <li>
-            <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li>
-            <a href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</div>-->
-<!--<div class="btn btn-warning" >提交</div>-->
+<div class="main">
+    <div class="main_content">
+        <p class="h_1">商品描述:</p>
+        <p class="describe">
+            LEAC丙烯酸聚合物水泥防水涂料
+            LEAC-21，LEAC-22
+                LEAC丙烯酸聚合物水泥防水涂料（简称LEAC-21，LEAC-22）是有中核北公司的前身核工业北京地质研究院RG项目组始于1989年研发应用的。1993年获核工业部部级
+            科技进步奖。原产品名称为RG聚合物水泥防水涂料。中核北公司是国内首家研发应用该类材料的单位。1985年项目组又抽调核工业北京地区地质研究院专业科研人员，依托院科研
+            仪器设备优势从事涂膜防水专用乳液的研究和生产。目前是国内专业从事防水专用乳液聚合物和聚合物水泥防水材料生产的一体化专业企业，该产品是国内此类材料技术先进、市场占有率大，应用广泛的产品。
+                本产品是由防水专用丙烯酸高分子乳液和特种专用粉料所组成的双组份防水涂料。产品为丙烯酸聚合物类产品，不添加增显剂和成膜助剂，具有优良的耐水、耐候性。
+                一、设计依据
+                17CJ10-1《LEAC丙烯酸聚合物水泥防水涂料应用构造》
+                二、适用范围
+                LEAC丙烯酸聚合物水泥防水涂料根据地域气候不同分为A型和B型，适用范围见（表1）
 
-</div>
-<div class="collapse navbar-fixed-bottom navbar-collapse" style="padding: 0">
-    <div style="float: right">
-        ©CopyRight 2006-2018 JB51.Net Inc All Rights Reserved. 版权所有
+            表1 LEAC系列产品适用部位及区域
+        </p>
+        <table class="one" align="center" style="border: 1px solid #F3F3F3; background-color: #d1e3e7">
+            <thead>
+                <tr>
+                    <th style="width: 100px;">序号</th>
+                    <th style="width: 200px;">LEAC产品名称</th>
+                    <th style="width: 300px">适用部位</th>
+                    <th style="width: 300px">适用地域</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>LEAC-IA</td>
+                    <td rowspan="2">屋面、地上外墙及地下工程</td>
+                    <td>华北及以南地区</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>LEAC-IB</td>
+                    <td>华北以北地区</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>LEAC-HF</td>
+                    <td>屋面、室外及对低温柔度严格要求的工程</td>
+                    <td>冬季温度在-40℃左右的高寒地区</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>LEAC-IIA</td>
+                    <td rowspan="2">地下工程及室内隔墙及地面</td>
+                    <td>华北及以南地区</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>LEAC-IIB</td>
+                    <td>华北以北地区</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="h_1">三：主要用途</p>
+        <table>
+            <tr>
+                <td>●  新建筑工程屋面、外墙、地下室、厨卫间、地暖地面、水池防水</td>
+                <td>●  城市管廊、桥梁等基础设施防水</td>
+            </tr>
+            <tr>
+                <td>●  旧建筑屋面、地下室、厨卫间、水池的改扩建及维修</td>
+                <td>●  蓄水池（库）、污水处理及饮用水设施的防水工程</td>
+            </tr>
+            <tr>
+                <td>●  混凝土火钢结构和桥梁防水工程</td>
+                <td>●  其他非水泥混凝土结构工程防水</td>
+            </tr>
+        </table>
+
+        <p class="h_1">四、主要特点</p>
+        <table>
+            <tr>
+                <td>●  本产品为水性环保产品，首批获得中国环境标志产品认证（绿色十环标志），可用于饮用水工程的防水施工，也是厨卫间防水和家装防水的首选。</td>
+            </tr>
+            <tr>
+                <td>●  施工完成后无搭接缝，可根据各类建筑造型、细部结构（如穿墙管、管根）的几何形状成膜，整体性好，避免了其他各类卷材在此类部位因贴合和搭接不好而造成的渗漏隐患。</td>
+            </tr>
+            <tr>
+                <td>●  材料避免了因窜水给维修造成的困扰。</td>
+            </tr>
+            <tr>
+                <td>●  耐候性好，耐冻融能力强，有很好的抗紫外线老化能力。通过耐紫外线老化10000h测试。本产品可在屋面长期裸露使用，方属性能可靠，使用寿命长。</td>
+            </tr>
+            <tr>
+                <td>●  有多种低温柔度材料可选择，适合全国所有建筑气候区。低温柔度可在-5℃~-40℃范围内选择，可满足全国不同建筑气候的使用环境。</td>
+            </tr>
+            <tr>
+                <td>●  耐水性好，除广泛应用于各类工民建筑防水外，也适用于各类水泥工程的内防水设计、防水涂膜可长期在水中裸露浸泡使用。</td>
+            </tr>
+            <tr>
+                <td>●  弹性好，抵抗基体开裂能力强，涂膜架桥能力超过3mm。</td>
+            </tr>
+            <tr>
+                <td>●  水性材料冷涂作业，完全避免了施工的火灾隐患，成膜物通过B1级耐火等级测试。</td>
+            </tr>
+            <tr>
+                <td>●  良好的粘接性，与常用建材均有较强的粘接或被粘接性。可在彩钢板、PVC管、玻璃、铝合金、不锈钢、瓷砖光面、石材抛光面等基面上实施防水施工。也可在木材、沥青、橡胶上涂膜</td>
+            </tr>
+        </table>
     </div>
-</div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!--<div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">新增产品</h4>
-            </div>-->
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <form id="form" action="/spin/fileUpload" method="post" enctype="multipart/form-data">
-                        <div class="row form-group">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading" align="center">
-                                    <label style="text-align: center;font-size: 18px;">文 件 上 传</label>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="col-sm-12">
-                                        <input id="input-id" name="file" multiple type="file" data-show-caption="true">
-                                    </div>
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon" id="basic-addon1">产品名称</span>
-                                    <input type="text" name="name" class="form-control" placeholder="请输入产品名称" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon" id="basic-addon12">淘宝链接</span>
-                                    <input type="text" name="tianmaoUrl" class="form-control" placeholder="请输入淘宝链接" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        颜色 <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">白</a></li>
-                                        <li><a href="#">红</a></li>
-                                        <li><a href="#">黄</a></li>
-                                        <li><a href="#">蓝</a></li>
-                                    </ul>
-                                </div>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        材质 <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">丝绸</a></li>
-                                        <li><a href="#">棉</a></li>
-                                        <li><a href="#">麻</a></li>
-                                        <li><a href="#">纺织物</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
+    <table class="three" >
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th colspan="5">技术指标</th>
+                <th colspan="5">检测结果</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="cr">
+                <td colspan="2">检测项目</td>
+                <td>LEAC-21A型</td>
+                <td>LEAC-21B型</td>
+                <td>LEAC-22A型</td>
+                <td>LEAC-22B型</td>
+                <td>LEAC-21HF型</td>
+                <td>LEAC-21A型</td>
+                <td>LEAC-21B型</td>
+                <td>LEAC-22A型</td>
+                <td>LEAC-22B型</td>
+                <td>LEAC-21HF型</td>
+            </tr>
+            <tr class="cr">
+                <td colspan="2">不透水性</td>
+                <td colspan="5">0.3MPa,30min,不透水</td>
+                <td colspan="5">0.6MPa,180min,不透水</td>
+            </tr>
+            <tr>
+                <td colspan="2">拉伸强度,MPa</td>
+                <td colspan="3">≥1.2</td>
+                <td colspan="2">≥1.8</td>
+                <td colspan="3">2.1</td>
+                <td colspan="2">2.7</td>
+            </tr>
+            <tr class="cr">
+                <td colspan="2">断裂延伸率，%</td>
+                <td colspan="3">≥200</td>
+                <td colspan="2">≥80</td>
+                <td colspan="3">291</td>
+                <td colspan="2">117</td>
+            </tr>
+            <tr>
+                <td rowspan="3">老化后拉伸强度保持率，%</td>
+                <td>热处理</td>
+                <td colspan="5">>≥80</td>
+                <td colspan="2">108</td>
+                <td colspan="2">115</td>
+                <td colspan="1">101</td>
+            </tr>
+            <tr class="cr">
+                <td>紫外线</td>
+                <td colspan="5">>≥80</td>
+                <td colspan="2">104</td>
+                <td colspan="2">99</td>
+                <td colspan="1">113</td>
+            </tr>
+            <tr>
+                <td>碱处理</td>
+                <td colspan="3">≥70</td>
+                <td colspan="2">≥80</td>
+                <td colspan="2">106</td>
+                <td colspan="2">101</td>
+                <td colspan="1">86</td>
+            </tr>
+            <tr class="cr">
+                <td rowspan="3">老化后断裂伸长率，%</td>
+                <td>热处理</td>
+                <td colspan="3">≥150</td>
+                <td colspan="2">≥65</td>
+                <td colspan="2">176</td>
+                <td colspan="2">96</td>
+                <td colspan="1">310</td>
+            </tr>
+            <tr>
+                <td>紫外线</td>
+                <td colspan="3">≥150</td>
+                <td colspan="2">≥65</td>
+                <td colspan="2">192</td>
+                <td colspan="2">117</td>
+                <td colspan="1">326</td>
+            </tr>
+            <tr class="cr">
+                <td>碱处理</td>
+                <td colspan="3">≥140</td>
+                <td colspan="2">≥65</td>
+                <td colspan="2">182</td>
+                <td colspan="2">131</td>
+                <td colspan="1">295</td>
+            </tr>
+            <tr class="cr">
+                <td colspan="2">粘接强度，MPa</td>
+                <td colspan="3">≥0.5</td>
+                <td colspan="2">≥.07</td>
+                <td colspan="2">0.9</td>
+                <td colspan="2">1.2</td>
+                <td colspan="1">0.7</td>
+            </tr>
+            <tr>
+                <td colspan="2">低温柔度，10mm棒</td>
+                <td>-10℃无裂纹</td>
+                <td>-20℃无裂纹</td>
+                <td>-5℃无裂纹</td>
+                <td>-10℃无裂纹</td>
+                <td>-40℃无裂纹</td>
+                <td>-10℃无裂纹</td>
+                <td>-20℃无裂纹</td>
+                <td>-5℃无裂纹</td>
+                <td>-10℃无裂纹</td>
+                <td>-40℃无裂纹</td>
+            </tr>
+            <tr>
+                <td colspan="12" style="text-align: left">聚苯板、棉织物等变形大的软物质上实施防水、防潮、防腐施工。</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="h_1">五、LEAC聚合物水泥防水涂料主要技术指标（见表2、表3）</p>
+    <p>注：本标准指标体系高于GB/T23445-2009国家标准</p>
+    <table class="three">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th colspan="3">技术指标</th>
+                <th colspan="3">检测结果</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>序号</td>
+                <td colspan="2">实验项目</td>
+                <td>LEAC-21 HF型</td>
+                <td>LEAC-21</td>
+                <td>LEAC-22</td>
+                <td>LEAC-21 HF型</td>
+                <td>LEAC-21</td>
+                <td>LEAC-22</td>
+            </tr>
+            <tr>
+                <td rowspan="2">1</td>
+                <td rowspan="2">拉力，N/50mm,≥</td>
+                <td>纵向</td>
+                <td>350</td>
+                <td>780</td>
+                <td>500</td>
+                <td>417</td>
+                <td>810</td>
+                <td>572</td>
+            </tr>
+            <tr>
+                <td>横向</td>
+                <td>250</td>
+                <td>510</td>
+                <td>450</td>
+                <td>314</td>
+                <td>505</td>
+                <td>501</td>
+            </tr>
+            <tr>
+                <td rowspan="2">2</td>
+                <td rowspan="2" colspan="2">低温柔度，（γ）15mm</td>
+                <td>-40℃</td>
+                <td>-18℃</td>
+                <td>-5℃</td>
+                <td>-40℃</td>
+                <td>-18℃</td>
+                <td>-5℃</td>
+            </tr>
+            <tr>
+                <td>无裂纹</td>
+                <td>无裂纹</td>
+                <td>无裂纹</td>
+                <td>无裂纹</td>
+                <td>无裂纹</td>
+                <td>无裂纹</td>
+            </tr>
+            <tr><td colspan="9">注：胎体增强材料为LEAC专用加筋布，按《弹性改性沥青券材》GB18242-2008检测</td></tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
