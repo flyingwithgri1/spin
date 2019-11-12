@@ -33,7 +33,7 @@ public class ResuDemo {
         List<Product> products = productService.show(pageNo);
         return products;
     }
-    @RequestMapping(value = "/products")
+    @RequestMapping(value = "/test")
     public String test(){
         log.info("查询页码" + 1);
         return "1";
