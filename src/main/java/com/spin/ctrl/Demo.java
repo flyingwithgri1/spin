@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Log
 @Controller
-@RequestMapping(value = "/spin")
+@RequestMapping
 public class Demo {
 
     @Autowired
